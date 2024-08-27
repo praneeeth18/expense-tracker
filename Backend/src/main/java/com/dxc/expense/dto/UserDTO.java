@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 
 public record UserDTO(
     
-    @NotNull(message = "ID cannot be null")
     Integer id,
 
     @NotBlank(message = "First name is required")
