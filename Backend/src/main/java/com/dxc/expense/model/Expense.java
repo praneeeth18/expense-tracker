@@ -37,7 +37,7 @@ public class Expense {
     private String description;
     
     @Column(name = "category", nullable = false)
-    private String category;  // Expense category field
+    private String category;
 
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
