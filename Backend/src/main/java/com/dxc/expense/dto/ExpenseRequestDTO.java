@@ -2,6 +2,8 @@ package com.dxc.expense.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +25,10 @@ public record ExpenseRequestDTO(
 	    @NotNull(message = "Created date cannot be null")
 //	    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	    LocalDateTime createdDate,
+	    
 
 	    @NotNull(message = "User ID cannot be null")
-	    Integer userId
+	    Integer userId,
+	    
+	    MultipartFile receipt
 	) {}

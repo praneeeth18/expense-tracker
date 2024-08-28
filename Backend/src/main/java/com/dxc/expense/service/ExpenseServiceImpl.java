@@ -1,5 +1,6 @@
 package com.dxc.expense.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,15 +25,43 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final UserDao userDao;
     private final ExpenseMapper expenseMapper;
 
-	@Override
-	public ExpenseResponseDTO createExpense(ExpenseRequestDTO request) {
-		User user = userDao.findById(request.userId())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + request.userId()));
+//	@Override
+//	public ExpenseResponseDTO createExpense(ExpenseRequestDTO request) {
+//		User user = userDao.findById(request.userId())
+//                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + request.userId()));
+//
+//        Expense expense = expenseMapper.toExpense(request, user);
+//        Expense savedExpense = expenseDao.save(expense);
+//        return expenseMapper.toExpenseResponseDTO(savedExpense);
+//	}
+    
+    @Override
+    public ExpenseResponseDTO createExpense(ExpenseRequestDTO request) {
+        User user = userDao.findById(request.userId())
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + request.userId()));
 
-        Expense expense = expenseMapper.toExpense(request, user);
+        byte[] receiptBytes = null;
+        if (request.receipt() != null && !request.receipt().isEmpty()) {
+            try {
+                receiptBytes = request.receipt().getBytes(); // Convert the file to bytes
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to store receipt", e);
+            }
+        }
+
+        // Set the receipt bytes into the Expense entity
+        Expense expense = Expense.builder()
+                .amount(request.amount())
+                .description(request.description())
+                .category(request.category())
+                .createdDate(request.createdDate())
+                .receipt(receiptBytes) // Set receipt bytes
+                .user(user)
+                .build();
+
         Expense savedExpense = expenseDao.save(expense);
         return expenseMapper.toExpenseResponseDTO(savedExpense);
-	}
+    }
 
 	@Override
     public ExpenseResponseDTO getExpenseById(Integer expenseId) {
@@ -73,5 +102,12 @@ public class ExpenseServiceImpl implements ExpenseService {
                 .map(expenseMapper::toExpenseResponseDTO)
                 .collect(Collectors.toList());
     }
+
+	@Override
+	public byte[] downloadReceipt(Integer expenseId) {
+		Expense expense = expenseDao.findById(expenseId)
+                .orElseThrow(() -> new ResourceNotFoundException("Expense not found with id: " + expenseId));
+        return expense.getReceipt();
+	}
 
 }

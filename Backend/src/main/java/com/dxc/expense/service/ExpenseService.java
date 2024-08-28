@@ -18,4 +18,6 @@ public interface ExpenseService {
     public List<ExpenseResponseDTO> getAllExpensesByUserId(Integer userId);
     
     public List<ExpenseResponseDTO> getAllExpenses();
+
+	public byte[] downloadReceipt(Integer expenseId);
 }

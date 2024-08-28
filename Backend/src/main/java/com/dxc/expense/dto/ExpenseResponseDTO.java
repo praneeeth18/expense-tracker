@@ -8,5 +8,6 @@ public record ExpenseResponseDTO(
 	    String description,
 	    String category,
 	    LocalDateTime createdDate,
-	    Integer userId
+	    Integer userId,
+	    byte[] receipt
 	) {}
