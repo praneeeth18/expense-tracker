@@ -1,13 +1,13 @@
 package com.dxc.expense.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record ExpenseResponseDTO(
 	    Integer expenseId,
 	    Double amount,
 	    String description,
 	    String category,
-	    LocalDateTime createdDate,
+	    LocalDate createdDate,
 	    Integer userId,
 	    byte[] receipt
 	) {}

@@ -1,5 +1,6 @@
 package com.dxc.expense.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.dxc.expense.dto.ExpenseRequestDTO;
@@ -7,7 +8,7 @@ import com.dxc.expense.dto.ExpenseResponseDTO;
 
 public interface ExpenseService {
 	
-    public ExpenseResponseDTO createExpense(ExpenseRequestDTO request);
+    public ExpenseResponseDTO createExpense(ExpenseRequestDTO request) throws IOException;
     
     public ExpenseResponseDTO getExpenseById(Integer expenseId);
     

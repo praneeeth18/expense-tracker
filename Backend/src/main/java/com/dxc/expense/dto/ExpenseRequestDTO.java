@@ -1,14 +1,14 @@
 package com.dxc.expense.dto;
 
-import java.time.LocalDateTime;
-
-import org.springframework.web.multipart.MultipartFile;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
+@Builder
 public record ExpenseRequestDTO(
 	    @NotNull(message = "Amount cannot be null")
 	    @Min(value = 0, message = "Amount must be a positive number")
@@ -22,13 +22,10 @@ public record ExpenseRequestDTO(
 	    @Size(max = 50, message = "Category cannot exceed 50 characters")
 	    String category,
 	    
-	    @NotNull(message = "Created date cannot be null")
-//	    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	    LocalDateTime createdDate,
-	    
+	    LocalDate createdDate,
 
 	    @NotNull(message = "User ID cannot be null")
 	    Integer userId,
 	    
-	    MultipartFile receipt
+	    byte[] receipt
 	) {}
