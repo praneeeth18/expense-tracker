@@ -1,0 +1,55 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ExpenseRequestDTO } from '../models/expense-request-dto';
+import { ExpenseResponseDTO } from '../models/expense-response-dto';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExpenseService {
+  private BASEURL: string = "http://localhost:8080/api/v1/expense";
+
+  constructor(private http: HttpClient) { }
+
+  createExpense(expense: ExpenseRequestDTO, receipt?: File): Observable<any> {
+    const formData = new FormData();
+    
+    formData.append('amount', expense.amount.toString());
+    formData.append('description', expense.description);
+    formData.append('category', expense.category);
+    if (expense.createdDate) {
+      formData.append('createdDate', expense.createdDate.toISOString().split('T')[0]); // Format date to string
+    }
+    formData.append('userId', expense.userId.toString());
+    if (receipt) {
+      formData.append('receipt', receipt);
+    }
+
+    return this.http.post(this.BASEURL, formData, {
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      })
+    });
+  }
+
+  // Method to get all expenses
+  getAllExpenses(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.BASEURL}all`);
+  }
+
+  // Method to get expense by ID
+  getExpenseById(expenseId: number): Observable<any> {
+    return this.http.get<any>(`${this.BASEURL}${expenseId}`);
+  }
+
+  // Method to update an existing expense
+  updateExpense(expenseId: number, expenseData: any): Observable<any> {
+    return this.http.put<any>(`${this.BASEURL}update/${expenseId}`, expenseData);
+  }
+
+  // Method to delete an expense
+  deleteExpense(expenseId: number): Observable<any> {
+    return this.http.delete<any>(`${this.BASEURL}delete/${expenseId}`);
+  }
+}

@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6f0ff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ccc;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 2em;
+  }
+  
+  .user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .button-group button {
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .button-group button:hover {
+    background-color: #a52a2a;
+  }
+  
+  .expenses-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+  }
+  
+  .total-expenses, .monthly-expenses {
+    width: 45%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .expense-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .expense-card {
+    background-color: #fff3cd;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-size: 1.2em;
+  }
+  
+  .chart {
+    text-align: center;
+  }
+  
+  .chart img {
+    max-width: 100%;
+    height: auto;
+  }
+  
