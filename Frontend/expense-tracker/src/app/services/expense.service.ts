@@ -33,8 +33,13 @@ export class ExpenseService {
     });
   }
 
-  // Method to get all expenses
-  getAllExpenses(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.BASEURL}all`);
+  getExpensesByUserId(userId: number): Observable<ExpenseResponseDTO[]> {
+    return this.http.get<ExpenseResponseDTO[]>(`${this.BASEURL}/user/${userId}`);
+  }
+
+  downloadReceipt(expenseId: number): Observable<Blob> {
+    return this.http.get(`${this.BASEURL}/${expenseId}/receipt`, {
+      responseType: 'blob'
+    });
   }
 }
