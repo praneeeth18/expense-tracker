@@ -1,14 +1,19 @@
 
 <div class="background"><h2>ADD EXPENSE</h2>
     <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
-      
+        <div>
+          <label for="user">User:</label>
+          <select formControlName="userId">
+            <option *ngFor="let user of users" [value]="user.id">{{ user.firstName }}</option>
+          </select>
+        </div>
         <div>
           <label for="category">Category:</label>
           <select id="category" formControlName="category">
-            <option value="utilities">Utilities</option>
-            <option value="gas">Gas</option>
-            <option value="food">Food</option>
-            <option value="entertainment">Entertainment</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Gas">Gas</option>
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
             <!-- we can add more options[categories] as needed -->
           </select>
           <div *ngIf="expenseForm.get('category')?.invalid && expenseForm.get('category')?.touched">

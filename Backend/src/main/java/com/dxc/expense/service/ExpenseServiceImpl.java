@@ -16,6 +16,7 @@ import com.dxc.expense.mapper.ExpenseMapper;
 import com.dxc.expense.model.Expense;
 import com.dxc.expense.model.User;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -63,12 +64,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
+	@Transactional
     public List<ExpenseResponseDTO> getAllExpensesByUserId(Integer userId) {
         
         userDao.findById(userId)
             .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-        List<Expense> expenses = expenseDao.findByUserId(userId);
+        List<Expense> expenses = expenseDao.findExpensesByUserId(userId);
 
         return expenses.stream()
                 .map(expenseMapper::toExpenseResponseDTO)

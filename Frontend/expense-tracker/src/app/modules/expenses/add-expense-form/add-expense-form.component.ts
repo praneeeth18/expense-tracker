@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ExpenseService } from '../../../services/expense.service';
 import { ExpenseRequestDTO } from '../../../models/expense-request-dto';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-add-expense-form',
@@ -11,15 +13,29 @@ import { Router } from '@angular/router';
 })
 export class AddExpenseFormComponent {
   expenseForm: FormGroup;
+  users: any[] = [];
 
-  constructor(private fb: FormBuilder, private expenseService: ExpenseService,private router: Router) {
+  constructor(private fb: FormBuilder, private expenseService: ExpenseService,private userService: UserService,private router: Router) {
     this.expenseForm = this.fb.group({
+      userId: ['', Validators.required],
       category: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(0)]],
       createdDate: ['', Validators.required],
       description: [''],
       receipt: ['']
     });
+
+  }
+
+  ngOnInit(): void {
+    this.userService.getAllUsers().subscribe({
+      next: (response) => {
+        this.users = response;
+      },
+      error: (error) => {
+        console.error('Error fetching users:', error);
+      }
+    })
   }
 
   onFileChange(event: any): void {
@@ -46,8 +62,8 @@ export class AddExpenseFormComponent {
         amount: expenseValues.amount,
         description: expenseValues.description,
         category: expenseValues.category,
-        createdDate: createdDate, // Pass the converted Date object
-        userId: 1 // Assuming you're hardcoding userId for now
+        createdDate: createdDate, 
+        userId: expenseValues.userId
       };
   
       // Call the service method to create the expense

@@ -37,19 +37,4 @@ export class ExpenseService {
   getAllExpenses(): Observable<any[]> {
     return this.http.get<any[]>(`${this.BASEURL}all`);
   }
-
-  // Method to get expense by ID
-  getExpenseById(expenseId: number): Observable<any> {
-    return this.http.get<any>(`${this.BASEURL}${expenseId}`);
-  }
-
-  // Method to update an existing expense
-  updateExpense(expenseId: number, expenseData: any): Observable<any> {
-    return this.http.put<any>(`${this.BASEURL}update/${expenseId}`, expenseData);
-  }
-
-  // Method to delete an expense
-  deleteExpense(expenseId: number): Observable<any> {
-    return this.http.delete<any>(`${this.BASEURL}delete/${expenseId}`);
-  }
 }
