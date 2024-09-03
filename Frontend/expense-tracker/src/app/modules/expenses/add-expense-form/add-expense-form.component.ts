@@ -57,7 +57,6 @@ export class AddExpenseFormComponent {
         createdDate = new Date(expenseValues.createdDate);
       }
   
-      // Prepare the DTO object with the necessary fields
       const expenseRequest: ExpenseRequestDTO = {
         amount: expenseValues.amount,
         description: expenseValues.description,
@@ -66,19 +65,15 @@ export class AddExpenseFormComponent {
         userId: expenseValues.userId
       };
   
-      // Call the service method to create the expense
+      
       this.expenseService.createExpense(expenseRequest, expenseValues.receipt).subscribe({
         next: (response) => {
           console.log('Expense created successfully!', response);
           alert('Entry added successfully');
-          this.router.navigate(['/']); // Redirect to home or another page upon success
+          this.router.navigate(['/']); 
         },
         error: (error) => {
           console.error('Error creating expense!', error);
-          // Handle error response here
-        },
-        complete: () => {
-          console.log('Expense creation process completed.');
         }
       });
     }

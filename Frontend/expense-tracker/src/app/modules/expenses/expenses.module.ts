@@ -4,12 +4,14 @@ import { AddExpenseFormComponent } from './add-expense-form/add-expense-form.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
+import { BudgetFormComponent } from './budget-form/budget-form.component';
 
 @NgModule({
   declarations: [
     AddExpenseFormComponent,
     DashboardComponent,
-    ViewExpensesComponent
+    ViewExpensesComponent,
+    BudgetFormComponent
     // Add other components related to expenses here
   ],
   imports: [ReactiveFormsModule,
