@@ -12,10 +12,6 @@ public interface ExpenseService {
     
     public ExpenseResponseDTO getExpenseById(Integer expenseId);
     
-    public ExpenseResponseDTO updateExpense(Integer expenseId, ExpenseRequestDTO request);
-    
-    public void deleteExpense(Integer expenseId);
-    
     public List<ExpenseResponseDTO> getAllExpensesByUserId(Integer userId);
     
     public List<ExpenseResponseDTO> getAllExpenses();

@@ -52,18 +52,6 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
 	@Override
-	public ExpenseResponseDTO updateExpense(Integer expenseId, ExpenseRequestDTO request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteExpense(Integer expenseId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	@Transactional
     public List<ExpenseResponseDTO> getAllExpensesByUserId(Integer userId) {
         
