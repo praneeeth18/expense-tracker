@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ExpensesModule } from './modules/expenses/expenses.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -16,8 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    ExpensesModule, 
-    HttpClientModule
+    ExpensesModule,
+    HttpClientModule,
+    HighchartsChartModule
   ],
   providers: [
     provideClientHydration()
