@@ -3,12 +3,10 @@ package com.dxc.expense.service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.dxc.expense.dao.ExpenseDao;
-import com.dxc.expense.dao.UserDao;
 import com.dxc.expense.dto.ExpenseRequestDTO;
 import com.dxc.expense.dto.ExpenseResponseDTO;
 import com.dxc.expense.exception.ResourceNotFoundException;
@@ -29,7 +27,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     
     public ExpenseResponseDTO createExpense(ExpenseRequestDTO requestDTO) throws IOException {
         User user = userService.findById(requestDTO.userId())
-                                  .orElseThrow(() -> new RuntimeException("User not found"));
+        		.orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + requestDTO.userId()));
 
         Expense expense = Expense.builder()
                                  .amount(requestDTO.amount())
@@ -62,7 +60,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         return expenses.stream()
                 .map(expenseMapper::toExpenseResponseDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 	@Override
@@ -70,7 +68,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         List<Expense> expenses = expenseDao.findAll();
         return expenses.stream()
                 .map(expenseMapper::toExpenseResponseDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 	@Override
