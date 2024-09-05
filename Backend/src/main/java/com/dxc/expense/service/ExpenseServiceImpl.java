@@ -24,11 +24,11 @@ import lombok.RequiredArgsConstructor;
 public class ExpenseServiceImpl implements ExpenseService {
 	
     private final ExpenseDao expenseDao;
-    private final UserDao userDao;
+    private final UserServiceImpl userService;
     private final ExpenseMapper expenseMapper;
     
     public ExpenseResponseDTO createExpense(ExpenseRequestDTO requestDTO) throws IOException {
-        User user = userDao.findById(requestDTO.userId())
+        User user = userService.findById(requestDTO.userId())
                                   .orElseThrow(() -> new RuntimeException("User not found"));
 
         Expense expense = Expense.builder()
@@ -55,7 +55,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Transactional
     public List<ExpenseResponseDTO> getAllExpensesByUserId(Integer userId) {
         
-        userDao.findById(userId)
+        userService.findById(userId)
             .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         List<Expense> expenses = expenseDao.findExpensesByUserId(userId);

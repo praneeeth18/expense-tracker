@@ -1,6 +1,7 @@
 package com.dxc.expense.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.dxc.expense.dao.UserDao;
 import com.dxc.expense.dto.UserDTO;
 import com.dxc.expense.dto.UserResponseDTO;
 import com.dxc.expense.mapper.UserMapper;
+import com.dxc.expense.model.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +33,11 @@ public class UserServiceImpl implements UserService{
 				.stream()
 				.map(mapper::fromUser)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public Optional<User> findById(Integer userId) {
+		return userDao.findById(userId);
 	}
 
 }
