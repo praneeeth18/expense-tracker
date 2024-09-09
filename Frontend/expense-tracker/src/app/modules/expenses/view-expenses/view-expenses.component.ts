@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseResponseDTO } from '../../../models/expense-response-dto';
 import { ExpenseService } from '../../../services/expense.service';
 import { UserService } from '../../../services/user.service';
+import { GridApi, GridReadyEvent } from 'ag-grid-community';
 
 @Component({
   selector: 'app-view-expenses',
@@ -9,6 +10,8 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './view-expenses.component.css'
 })
 export class ViewExpensesComponent implements OnInit {
+
+  private gridApi!: GridApi<any>;
 
   users: any[] = [];
   expenses: ExpenseResponseDTO[] = [];
@@ -51,6 +54,14 @@ export class ViewExpensesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+  }
+
+  onBtExport() {
+    this.gridApi.exportDataAsCsv();
+  }
+
+  onGridReady(event: GridReadyEvent<any>) {
+    this.gridApi = event.api;
   }
 
   // Load users from the UserService
