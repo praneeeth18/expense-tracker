@@ -4,7 +4,6 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { BudgetDTO } from '../../../models/budget-dto';
 import { BudgetServiceService } from '../../../services/budget-service.service';
-import { response } from 'express';
 
 @Component({
   selector: 'app-budget-form',
@@ -14,7 +13,7 @@ import { response } from 'express';
 export class BudgetFormComponent {
 
   budgetForm: FormGroup;
-  users: any[] = []; // Array to store fetched users
+  users: any[] = []; 
 
   constructor(
     private fb: FormBuilder,

@@ -1,16 +1,13 @@
 <div class="container">
-  <!-- Page Title -->
   <div class="text-center mt-4 mb-4">
     <h1>Expenses</h1>
 
-    <!-- User Selector -->
     <select id="selectedUserId" (change)="onUserSelect($event)">
       <option value="">Select User</option>
       <option *ngFor="let user of users" [value]="user.id">{{ user.firstName }}</option>
     </select>
   </div>
 
-  <!-- AG Grid Table for Expenses -->
   <div class="ag-theme-alpine" style="height: 500px; width: 100%; margin-top: 20px;">
     <ag-grid-angular
       [rowData]="rowData"
@@ -24,7 +21,7 @@
   <div>
     <button
       (click)="onBtExport()"
-      style="margin-bottom: 5px; font-weight: bold"
+      class="btn btn-primary"
     >
       Export to Excel
     </button>

@@ -20,7 +20,6 @@ export class ViewExpensesComponent implements OnInit {
   gridOptions: any;
 
   constructor(private expenseService: ExpenseService, private userService: UserService) {
-    // Define the column structure for AG Grid
     this.columnDefs = [
       { headerName: 'Expense ID', field: 'expenseId', sortable: true, filter: true },
       { headerName: 'Category', field: 'category', sortable: true, filter: true },
@@ -39,7 +38,6 @@ export class ViewExpensesComponent implements OnInit {
       }
     ];
 
-    // Set AG Grid options
     this.gridOptions = {
       pagination: true,
       paginationPageSize: 10,
@@ -64,7 +62,6 @@ export class ViewExpensesComponent implements OnInit {
     this.gridApi = event.api;
   }
 
-  // Load users from the UserService
   loadUsers(): void {
     this.userService.getAllUsers().subscribe({
       next: (response) => {
@@ -76,13 +73,12 @@ export class ViewExpensesComponent implements OnInit {
     });
   }
 
-  // Load expenses based on selected user
   onUserSelect(event: Event): void {
     const selectedUserId = (event.target as HTMLSelectElement).value;
     if (selectedUserId) {
       this.expenseService.getExpensesByUserId(Number(selectedUserId)).subscribe({
         next: (response) => {
-          this.rowData = response;  // Set the rowData for AG Grid
+          this.rowData = response;  
         },
         error: (error) => {
           console.error('Error fetching expenses:', error);
@@ -91,13 +87,11 @@ export class ViewExpensesComponent implements OnInit {
     }
   }
 
-  // Format date for the Date column
   formatDate(params: any): string {
     const date = new Date(params.value);
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
 
-  // Download receipt method
   downloadReceipt(expenseId: number): void {
     this.expenseService.downloadReceipt(expenseId).subscribe({
       next: (response) => {

@@ -51,7 +51,6 @@ export class AddExpenseFormComponent {
     if (this.expenseForm.valid) {
       const expenseValues = this.expenseForm.value;
   
-      // Convert createdDate to a Date object if it's not already one
       let createdDate: Date | null = null;
       if (expenseValues.createdDate) {
         createdDate = new Date(expenseValues.createdDate);
