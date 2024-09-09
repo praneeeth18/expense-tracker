@@ -3,8 +3,21 @@
   <div class="user-icon">
     <img src="path/to/icon.png" alt="User Icon">
   </div>
+  <div class="notification-icon">
+    <button class="notification-button" (click)="toggleNotifications()">
+        <span class="sr-only">Notifications</span>
+    </button>
+    <span class="notification-count" *ngIf="notifications.length > 0">{{ notifications.length }}</span>
+  </div>
+  <div class="notification-dropdown" *ngIf="showNotifications">
+    <ul>
+      <li *ngFor="let notification of notifications">
+        {{ notification }}
+      </li>
+    </ul>
+  </div>  
 </div>
- 
+
 <div class="button-group">
   <a href="view-expense">
     <button type="button">View Expenses</button>
@@ -17,8 +30,8 @@
     </div>
   </div>
 </div>
- 
- 
+
+
 <div class="selector-container">
   <div class="user-selector">
     <label for="userSelect">Select User:</label>
@@ -30,12 +43,12 @@
     </select>
   </div>
 </div>
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
 <div class="container">
   <div class="monthly-expenses">
     <h2>Expenses by Category</h2>
@@ -52,7 +65,7 @@
       </select>
     </div>
   </div>
- 
+  
   <div class="monthly-expenses">
     <h2>Monthly Expenses</h2>
     <div class="chart line">
@@ -64,11 +77,11 @@
     </div>
   </div>
 </div>
- 
- 
- 
+
+
+
 <div class="expenses-container">
- 
+  
       <h2>Total EXPENSES</h2>
       <div class="expense-cards">
           <div class="expense-card">
@@ -77,5 +90,3 @@
           </div>
       </div>
   </div>
- 
- 

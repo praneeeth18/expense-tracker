@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { ExpensesModule } from './modules/expenses/expenses.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     CoreModule,
     ExpensesModule,
     HttpClientModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    AgGridModule,
   ],
   providers: [
     provideClientHydration()
