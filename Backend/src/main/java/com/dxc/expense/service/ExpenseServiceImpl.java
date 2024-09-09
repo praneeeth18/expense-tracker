@@ -62,6 +62,19 @@ public class ExpenseServiceImpl implements ExpenseService {
                 .map(expenseMapper::toExpenseResponseDTO)
                 .toList();
     }
+	
+	@Transactional
+	public Double getTotalExpensesForCurrentMonth(Integer userId) {
+
+		LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+        LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+
+        List<Expense> expenses = expenseDao.findByUserIdAndCreatedDateBetween(userId, startOfMonth, endOfMonth);
+
+        return expenses.stream()
+                       .mapToDouble(Expense::getAmount)
+                       .sum();
+    }
 
 	@Override
     public List<ExpenseResponseDTO> getAllExpenses() {

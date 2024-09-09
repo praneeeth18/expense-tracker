@@ -1,5 +1,6 @@
 package com.dxc.expense.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,7 @@ public interface BudgetDao extends JpaRepository<Budget, Integer> {
 	
 	@Query("SELECT b FROM Budget b WHERE b.user.id = :userId")
 	List<Budget> findBudgetByUserId(@Param("userId") Integer userId);
+	
+	List<Budget> findByUserIdAndStartDateBetween(Integer userId, LocalDate startDate, LocalDate endDate);
 
 }
