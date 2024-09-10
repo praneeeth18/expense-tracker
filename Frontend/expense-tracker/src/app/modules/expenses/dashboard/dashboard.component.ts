@@ -29,10 +29,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
-
-    this.notificationService.getNotifications().subscribe((data) => {
-      this.notifications = data;
-    });
   }
 
   toggleNotifications() {
@@ -54,6 +50,19 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  loadNotificationsForUser(userId: number): void {
+    this.notifications = [];
+    this.notificationService.getUserNotifications(userId).subscribe(
+      (data: any) => {
+        this.notifications = data;
+      },
+      (error) => {
+        console.error('Error fetching notifications', error);
+      }
+    );
+  }
+
+
   loadUserExpenses(userId: number | null): void {
     if (userId !== null) { 
       this.expenseService.getExpensesByUserId(userId).subscribe((expenses: ExpenseResponseDTO[]) => {
@@ -69,6 +78,7 @@ export class DashboardComponent implements OnInit {
     this.selectedUserId = +event.target.value;  
     if (this.selectedUserId) {
       this.loadUserExpenses(this.selectedUserId);
+      this.loadNotificationsForUser(this.selectedUserId);
     }
   }
 

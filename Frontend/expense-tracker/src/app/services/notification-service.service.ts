@@ -14,4 +14,8 @@ export class NotificationServiceService {
   getNotifications(): Observable<string[]> {
     return this.http.get<string[]>(this.BASEURL);
   }
+
+  getUserNotifications(userId: number): Observable<any> {
+    return this.http.get(`${this.BASEURL}/${userId}`);
+  }
 }
