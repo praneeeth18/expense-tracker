@@ -21,6 +21,5 @@ public record BudgetDTO(
 	    LocalDate endDate,
 
 	    @NotNull(message = "User ID is required.")
-	    @Positive(message = "User ID must be positive.")
 	    Integer userId
 	) {}
