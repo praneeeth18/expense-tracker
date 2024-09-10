@@ -34,14 +34,8 @@ public class Notification {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY) 
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false) 
     private User user;
-    
-    public Notification(String message, User user) {
-        this.message = message;
-        this.user = user;
-        this.createdAt = LocalDateTime.now(); // Automatically set the creation time
-    }
 
 }
